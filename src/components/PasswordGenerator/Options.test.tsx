@@ -15,14 +15,13 @@ it('should change checkbox value when clicked', async () => {
 })
 
 it('should have at least one option selected', async () => {
-    const checkboxLowercase = screen.getByRole('checkbox', { name: 'Include Lowercase' })
-    const checkboxUppercase = screen.getByRole('checkbox', { name: 'Include Uppercase' })
-    const checkboxNumbers = screen.getByRole('checkbox', { name: 'Include Numbers' })
-    const checkboxSymbols = screen.getByRole('checkbox', { name: 'Include Symbols' })
+    const checkboxLowercase = screen.getByRole<HTMLInputElement>('checkbox', { name: 'Include Lowercase' })
+    const checkboxUppercase = screen.getByRole<HTMLInputElement>('checkbox', { name: 'Include Uppercase' })
+    const checkboxNumbers = screen.getByRole<HTMLInputElement>('checkbox', { name: 'Include Numbers' })
+    const checkboxSymbols = screen.getByRole<HTMLInputElement>('checkbox', { name: 'Include Symbols' })
 
     await userEvent.click(checkboxLowercase)
 
-    const checkedBoxes = ([checkboxLowercase, checkboxUppercase, checkboxNumbers, checkboxSymbols] as HTMLInputElement[]).filter(checkbox => checkbox.checked)
+    const checkedBoxes = [checkboxLowercase, checkboxUppercase, checkboxNumbers, checkboxSymbols].filter(checkbox => checkbox.checked)
     expect(checkedBoxes.length).toBeGreaterThan(0)
-
 })
