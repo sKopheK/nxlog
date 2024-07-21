@@ -2,26 +2,36 @@ import { render, screen } from "@testing-library/react"
 import userEvent from '@testing-library/user-event'
 import Options from "./Options"
 
-beforeEach(() => render(<Options />))
+describe('Default state', () => {
+    beforeEach(() => render(<Options selected={{
+        lowercase: true,
+        uppercase: false,
+        numbers: false,
+        symbols: false,
+    }} setSelected={() => { }} />))
 
-it('should have Include Lowercase checked by default', () => {
-    screen.getByRole('checkbox', { name: 'Include Lowercase', checked: true })
+    it('should have Include Lowercase checked by default', () => {
+        screen.getByRole('checkbox', { name: 'Include Lowercase', checked: true })
+    })
+
+    it('should have other checkboxes unchecked by default', () => {
+        screen.getByRole('checkbox', { name: 'Include Uppercase', checked: false })
+        screen.getByRole('checkbox', { name: 'Include Numbers', checked: false })
+        screen.getByRole('checkbox', { name: 'Include Symbols', checked: false })
+    })
 })
 
-it('should change checkbox value when clicked', async () => {
+it('should call change handler when clicked', async () => {
+    const handler = jest.fn(() => { })
+    render(<Options selected={{
+        lowercase: true,
+        uppercase: false,
+        numbers: false,
+        symbols: false,
+    }} setSelected={handler} />)
+
     const checkboxUppercase = screen.getByRole('checkbox', { name: 'Include Uppercase' })
     await userEvent.click(checkboxUppercase)
-    expect(checkboxUppercase).toBeChecked()
-})
 
-it('should have at least one option selected', async () => {
-    const checkboxLowercase = screen.getByRole<HTMLInputElement>('checkbox', { name: 'Include Lowercase' })
-    const checkboxUppercase = screen.getByRole<HTMLInputElement>('checkbox', { name: 'Include Uppercase' })
-    const checkboxNumbers = screen.getByRole<HTMLInputElement>('checkbox', { name: 'Include Numbers' })
-    const checkboxSymbols = screen.getByRole<HTMLInputElement>('checkbox', { name: 'Include Symbols' })
-
-    await userEvent.click(checkboxLowercase)
-
-    const checkedBoxes = [checkboxLowercase, checkboxUppercase, checkboxNumbers, checkboxSymbols].filter(checkbox => checkbox.checked)
-    expect(checkedBoxes.length).toBeGreaterThan(0)
+    expect(handler).toHaveBeenCalled()
 })

@@ -5,9 +5,30 @@
 }
 
 .inputWrapper {
+    position: relative;
+}
 
+.password {
+    line-height: 2.5;
+    padding: 0 35px 0 .5rem;
+}
+
+.copyBtn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
 }
 
 .formField {
+    display: flex;
+    flex-direction: column;
+}
 
+.sliderLegend {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }

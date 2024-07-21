@@ -1,12 +1,7 @@
-import { ChangeEventHandler, FC, useState } from 'react';
+import { ChangeEventHandler, FC } from 'react';
 import styles from './Options.module.scss';
-
-enum OptionsField {
-    lowercase = 'lowercase',
-    uppercase = 'uppercase',
-    numbers = 'numbers',
-    symbols = 'symbols',
-}
+import { SetOptionAction } from './reducer';
+import { OptionsField } from './types';
 
 const optionFieldLabels: Record<OptionsField, string> = {
     [OptionsField.lowercase]: 'Include Lowercase',
@@ -15,25 +10,14 @@ const optionFieldLabels: Record<OptionsField, string> = {
     [OptionsField.symbols]: 'Include Symbols',
 }
 
-const defaultState: Record<OptionsField, boolean> = {
-    [OptionsField.lowercase]: true,
-    [OptionsField.uppercase]: false,
-    [OptionsField.numbers]: false,
-    [OptionsField.symbols]: false,
+type OptionsProps = {
+    selected: Record<OptionsField, boolean>
+    setSelected: (payload: SetOptionAction['payload']) => void
 }
 
-const Options: FC = () => {
-    const [selected, setSelected] = useState(defaultState);
-
+const Options: FC<OptionsProps> = ({ selected, setSelected }) => {
     const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target: { checked, id } }) => {
-        setSelected((currSelected) => {
-            const updated = { ...currSelected, [id]: checked }
-            // at least one option should be selected
-            if (Object.values(updated).filter(Boolean).length === 0) {
-                return currSelected
-            }
-            return updated
-        })
+        setSelected([id as OptionsField, checked])
     }
 
     return (
