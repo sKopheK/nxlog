@@ -1,7 +1,16 @@
 .formField {
     display: flex;
     flex-direction: column;
-    text-align: left;
+}
+
+.label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.value {
+    font-weight: 500;
 }
 
 .sliderLegend {

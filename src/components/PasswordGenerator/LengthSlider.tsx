@@ -17,7 +17,10 @@ const LengthSlider: FC<LengthSliderProps> = ({ value, onChange }) => {
 
     return (
         <div className={styles.formField}>
-            <label htmlFor="passwordLength">Password length</label>
+            <div className={styles.label}>
+                <label htmlFor="passwordLength">Password length</label>
+                <span className={styles.value}>{value}</span>
+            </div>
             <input type="range" id="passwordLength" onChange={handleOnChange} value={value} min={MIN_PASSWORD_LENGTH} max={MAX_PASSWORD_LENGTH} />
             <div className={styles.sliderLegend}>
                 <span>{MIN_PASSWORD_LENGTH}</span>
