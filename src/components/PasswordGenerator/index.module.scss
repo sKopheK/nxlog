@@ -1,5 +1,9 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    row-gap: .5rem;
+    row-gap: 1rem;
+}
+
+.generateBtn {
+    line-height: 3;
 }

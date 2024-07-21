@@ -42,7 +42,7 @@ const PasswordGenerator: FC = () => {
             <Input value={password} />
             <LengthSlider value={passwordLength} onChange={handleLengthChange} />
             <Options selected={options} setSelected={handleOnOptionChange} />
-            <button type="button" onClick={handleGenerate}>Generate</button>
+            <button type="button" onClick={handleGenerate} className={styles.generateBtn}>Generate</button>
         </div>
     );
 };

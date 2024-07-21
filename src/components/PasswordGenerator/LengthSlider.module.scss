@@ -1,10 +1,12 @@
 .formField {
     display: flex;
     flex-direction: column;
+    text-align: left;
 }
 
 .sliderLegend {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    font-size: 80%;
 }
