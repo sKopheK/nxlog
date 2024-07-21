@@ -6,12 +6,12 @@ export enum Action {
   SET_OPTION = 'SET_OPTION'
 }
 
-type SetPasswordAction = {
+export type SetPasswordAction = {
   type: Action.SET_PASSWORD,
   payload: string
 }
 
-type SetLengthAction = {
+export type SetLengthAction = {
   type: Action.SET_LENGTH,
   payload: number
 }

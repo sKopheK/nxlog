@@ -1,12 +1,14 @@
-import { ChangeEventHandler, FC, useReducer } from 'react';
-import Options from './Options';
-import { Action, passwordGeneratorReducer, SetOptionAction } from './reducer';
-import styles from './styles.module.scss';
+import { FC, useReducer } from 'react';
+
 import { PasswordGeneratorState } from './types';
+
+import { Action, passwordGeneratorReducer, SetLengthAction, SetOptionAction } from './reducer';
 import { generatePassword } from './utils';
 
-const MIN_PASSWORD_LENGTH = 6
-const MAX_PASSWORD_LENGTH = 20
+import LengthSlider from './LengthSlider';
+import Options from './Options';
+
+import styles from './styles.module.scss';
 
 const initialState: PasswordGeneratorState = {
     password: '',
@@ -22,8 +24,8 @@ const initialState: PasswordGeneratorState = {
 const PasswordGenerator: FC = () => {
     const [{ password, passwordLength, options }, dispatch] = useReducer(passwordGeneratorReducer, initialState)
 
-    const handleLengthChange: ChangeEventHandler<HTMLInputElement> = ({target: {value}}) => {
-        dispatch({ type: Action.SET_LENGTH, payload: Number(value) })
+    const handleLengthChange= (payload: SetLengthAction['payload']) => {
+        dispatch({ type: Action.SET_LENGTH, payload })
     }
 
     const handleGenerate = () => {
@@ -45,14 +47,7 @@ const PasswordGenerator: FC = () => {
                     </svg>
                 </button>
             </div>
-            <div className={styles.formField}>
-                <label htmlFor="passwordLength">Password length</label>
-                <input type="range" id="passwordLength" onChange={handleLengthChange} value={passwordLength} min={MIN_PASSWORD_LENGTH} max={MAX_PASSWORD_LENGTH} />
-                <div className={styles.sliderLegend}>
-                    <span>{MIN_PASSWORD_LENGTH}</span>
-                    <span>{MAX_PASSWORD_LENGTH}</span>
-                </div>
-            </div>
+            <LengthSlider value={passwordLength} onChange={handleLengthChange} />
             <Options selected={options} setSelected={handleOnOptionChange} />
             <button type="button" onClick={handleGenerate}>Generate</button>
         </div>
