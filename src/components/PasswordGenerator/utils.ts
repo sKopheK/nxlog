@@ -8,17 +8,23 @@ const chars: Record<OptionsField, string> = {
 }
 
 export const generatePassword = (length: number, options: Record<OptionsField, boolean>) => {
-  let charset = ''
+  const charset: string[] = []
+  const requiredChars: string[] = []
 
   Object.entries(options).forEach(([option, isEnabled]) => {
-    if (!isEnabled) return
-    charset += chars[option as OptionsField]
+    const optionField = option as OptionsField
+    if (!isEnabled || !chars[optionField] || !chars[optionField].length) return
+    charset.push(...chars[optionField].split(''))
+    requiredChars.push(chars[optionField][Math.floor(Math.random() * chars[optionField].length)])
   })
 
-  let password = ''
-  for (let i = 0; i < length; i++) {
+  const password = [...requiredChars]
+  for (let i = requiredChars.length; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * charset.length)
-    password += charset[randomIndex]
+    password.push(charset[randomIndex])
   }
-  return password
+
+  password.sort(() => Math.random() - 0.5)
+
+  return password.join('')
 }
