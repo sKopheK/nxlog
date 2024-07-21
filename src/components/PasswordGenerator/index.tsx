@@ -9,7 +9,7 @@ import LengthSlider from './LengthSlider';
 import Options from './Options';
 
 import Input from './Input';
-import styles from './styles.module.scss';
+import styles from './index.module.scss';
 
 const initialState: PasswordGeneratorState = {
     password: '',
