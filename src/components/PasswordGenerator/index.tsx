@@ -5,10 +5,10 @@ import { PasswordGeneratorState } from './types';
 import { Action, passwordGeneratorReducer, SetLengthAction, SetOptionAction } from './reducer';
 import { generatePassword } from './utils';
 
+import Input from './Input';
 import LengthSlider from './LengthSlider';
 import Options from './Options';
 
-import Input from './Input';
 import styles from './index.module.scss';
 
 const initialState: PasswordGeneratorState = {
