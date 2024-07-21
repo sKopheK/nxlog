@@ -3,7 +3,7 @@ import { render } from "@testing-library/react"
 
 import LengthSlider from './LengthSlider';
 
-it('should display min and max values', async () => {
+it('should display min and max values', () => {
     render(<LengthSlider value={8} onChange={() => { }} />)
 
     const passwordLength = screen.getByRole<HTMLInputElement>('slider', { name: 'Password length' })
@@ -11,7 +11,7 @@ it('should display min and max values', async () => {
     screen.getByText(passwordLength.getAttribute('max')!)
 })
 
-it('should call change handler when slid', async () => {
+it('should call change handler when slid', () => {
     const handler = jest.fn(() => { })
     render(<LengthSlider value={8} onChange={handler} />)
 
