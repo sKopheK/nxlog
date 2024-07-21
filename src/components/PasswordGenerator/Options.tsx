@@ -1,7 +1,10 @@
 import { ChangeEventHandler, FC } from 'react';
-import styles from './Options.module.scss';
-import { SetOptionAction } from './reducer';
+
 import { OptionsField } from './types';
+
+import { SetOptionAction } from './reducer';
+
+import styles from './Options.module.scss';
 
 const optionFieldLabels: Record<OptionsField, string> = {
     [OptionsField.lowercase]: 'Include Lowercase',
